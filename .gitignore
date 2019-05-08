@@ -1,0 +1,7 @@
+reservationenv
+credentials.json
+token.pickle
+*.pyc
+*~
+__pycache__
+db.sqlite3

@@ -1,0 +1,39 @@
+{% extends 'reservation/base.html' %}
+
+{% block content %}
+{% load humanize %}
+
+<h2>Ver las reservaciones para el rango:</h2>
+
+  <div class="row">
+    <div class="col">
+
+      <form method="POST" class="post-form">{% csrf_token %}
+        {{ date_form}}
+        {{ date_form.media }}
+          <button type="submit" class="save btn btn-info my-3">Ver reservas</button>
+      </form>
+
+    </div>
+  </div>
+
+
+  {% if date_form.is_valid %}
+  <h4>Las reservas para el rango de fechas seleccionado son:</h4>
+    <div class="row py-4">
+      {% for reservation in reservation_list %}
+      <div class="col">
+       <p> {{ reservation.motive }} {{ reservation.start_datetime | naturalday }} {{ reservation.start_datetime| time }} </p>
+      </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+
+<div class="row">
+  <div class="col">
+      <a class="btn btn-info" href="{% url 'reserve' %}" role="button">Hacer reservacion</a>
+  </div>
+</div>
+
+{% endblock %}
