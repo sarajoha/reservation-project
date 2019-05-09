@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from simpleduration import Duration, InvalidDuration
 
 
 # Create your models here.
@@ -18,16 +19,27 @@ class Reservation(models.Model):
     MOTIVE_CHOICES = ((STANDUP, 'Stand Up'), (CLASS, 'Clase'), )
 
     start_datetime = models.DateTimeField(null=True)
-    duration = models.DurationField()
+    duration_text = models.CharField(max_length=100, null=True, blank=True)
+    duration = models.DurationField(blank=True)
     end_datetime = models.DateTimeField(null=True, blank=True)
     motive = models.CharField(max_length=20, choices=MOTIVE_CHOICES) #which choices?
     user = models.ForeignKey(User, on_delete=models.PROTECT)
+
+    def calculate_duration(self):
+        try:
+            dur = Duration(self.duration_text)
+            dur_td = dur.timedelta()
+            self.duration = dur_td
+        except InvalidDuration:
+            pass
+
 
     def calculate_time_end(self):
         self.end_datetime = self.start_datetime + self.duration
 
 
     def save(self, *args, **kwargs):
+        self.calculate_duration()
         self.calculate_time_end()
         super().save(*args, **kwargs)
 

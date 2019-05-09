@@ -21,7 +21,10 @@ class ReservationAdmin(admin.ModelAdmin):
             return False
 
     def image_tag(self, obj):
-        return format_html('<img src="{}" />'.format(obj.user.avatar.url))
+        if obj.user.avatar:
+            return format_html('<img src="{}" />'.format(obj.user.avatar.url))
+        else:
+            return None
 
     en_el_futuro.boolean = True
     image_tag.short_description = 'User image'

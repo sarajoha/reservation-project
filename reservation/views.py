@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Reservation
 from .forms import ReservationForm, get_dateForm
 import quickstart
+#from simpleduration import Duration, InvalidDuration
 
 # Create your views here.
 def reservations(request, date=None):
@@ -26,9 +27,9 @@ def reserve(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            print(post)
-            print(dir(post))
-            print(post.motive, post.start_datetime, post.end_datetime)
+            #print(post)
+            #print(dir(post))
+            #print(post.motive, post.start_datetime, post.end_datetime)
             start_datetime = post.start_datetime.isoformat()
             end_datetime = post.end_datetime.isoformat()
             service = quickstart.main()
