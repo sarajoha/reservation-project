@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Reservation
 from .forms import ReservationForm, get_dateForm
 import quickstart
-#from simpleduration import Duration, InvalidDuration
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def reservations(request, date=None):
 
     if request.method == 'POST':
@@ -20,7 +21,7 @@ def reservations(request, date=None):
         return render(request, 'reservation/reservations.html', {'date_form': date_form,})
 
 
-
+@login_required
 def reserve(request):
     if request.method == 'POST':
         form = ReservationForm(request.POST)

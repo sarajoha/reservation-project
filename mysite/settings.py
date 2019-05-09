@@ -141,3 +141,5 @@ TIME_INPUT_FORMATS = ['%H:%M'] #14:30
 BOOTSTRAP4 = {
     'include_jquery': True,
 }
+
+LOGIN_REDIRECT_URL = '/'

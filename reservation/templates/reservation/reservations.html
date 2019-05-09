@@ -23,7 +23,7 @@
     <div class="row py-4">
       {% for reservation in reservation_list %}
       <div class="col">
-       <p> {{ reservation.motive }} {{ reservation.start_datetime | naturalday }} {{ reservation.start_datetime| time }} </p>
+       <p> {{ reservation.get_motive_display }} {{ reservation.start_datetime | naturalday }} {{ reservation.start_datetime| time }} </p>
       </div>
       {% endfor %}
     </div>

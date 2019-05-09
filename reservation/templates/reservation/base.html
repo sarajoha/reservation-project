@@ -14,7 +14,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Answers</title>
+    <title>Reservaciones</title>
 
     {% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
     {% bootstrap_css %}         {# Embed Bootstrap CSS #}
@@ -23,7 +23,15 @@
   </head>
   <body>
     <div class="container-fluid">
-      <!-- Navbar que comen, mas comelon, producto favorito -->
+
+      <div class="page-header">
+        {% if user.is_authenticated %}
+          <p class="top-menu">Hola {{ user.username }} <small>(<a href="{% url 'logout' %}">Cerrar sesión</a>)</small></p>
+        {% else %}
+          <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+        {% endif %}
+      </div>
+
       {% block content %}
       {% endblock %}
 
