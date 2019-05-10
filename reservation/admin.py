@@ -42,7 +42,6 @@ class ReservationAdmin(admin.ModelAdmin):
 
     def image_tag(self, obj):
         if obj.user.avatar:
-            # return format_html('<img src="{}" />'.format(obj.user.avatar.url))
             return format_html('<img src="{}" />'.format(obj.user.avatar.url))
         else:
             return None
@@ -51,6 +50,10 @@ class ReservationAdmin(admin.ModelAdmin):
     image_tag.short_description = 'User image'
 
 
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'email', 'username')
+
+
 # Register your models here.
-admin.site.register(User)
+admin.site.register(User, UserAdmin)
 admin.site.register(Reservation, ReservationAdmin)

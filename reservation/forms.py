@@ -1,5 +1,5 @@
 from django import forms
-from .models import Reservation
+from .models import Reservation, User
 from bootstrap_datepicker_plus import DatePickerInput, DateTimePickerInput
 from django.utils import timezone
 from simpleduration import Duration, InvalidDuration
@@ -8,7 +8,8 @@ from simpleduration import Duration, InvalidDuration
 
 class ReservationForm(forms.ModelForm):
 
-    #duration =
+    #que en el campo de user, me guarde el user que esta logueado
+    #user = User.object.filter
 
     class Meta:
         model = Reservation

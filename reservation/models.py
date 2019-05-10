@@ -1,10 +1,15 @@
 from django.db import models
 from django import forms
 from simpleduration import Duration, InvalidDuration
+#from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import UserManager
+from django.contrib.auth.models import AbstractUser
+
 
 
 # Create your models here.
-class User(models.Model):
+class User(AbstractUser):
     '''
     Class describing an user that has 3 properties and 1 method:
         Properties:
@@ -18,6 +23,14 @@ class User(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     avatar = models.ImageField(upload_to='avatars', blank=True)
+    email = models.EmailField(max_length=255, blank=True, null=True, unique=True)
+    username = models.CharField(max_length=50, blank=True, null=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = UserManager()
+
 
     class Meta:
         ordering = ('first_name', )

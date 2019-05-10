@@ -33,10 +33,17 @@ def reserve(request):
             #print(post.motive, post.start_datetime, post.end_datetime)
             start_datetime = post.start_datetime.isoformat()
             end_datetime = post.end_datetime.isoformat()
+            user_name = ' '.join([post.user.first_name, post.user.last_name])
             service = quickstart.main()
             event = {
                   'summary': post.motive,
                   'location': 'Sala de vidrio',
+                  'creator': {
+                    'displayName': user_name
+                  },
+                  'organizer': {
+                    'displayName': post.user.first_name
+                  },
                   'start': {
                     'dateTime': start_datetime,
                     'timeZone': 'America/Bogota',
@@ -45,9 +52,11 @@ def reserve(request):
                     'dateTime': end_datetime,
                     'timeZone': 'America/Bogota',
                   },
+                  'visibility': 'public',
                 }
 
-            event = service.events().insert(calendarId='primary', body=event).execute()
+            event = service.events().insert(calendarId='6q974sd40tgfue316ucgiunjb8@group.calendar.google.com',
+                                            body=event).execute()
             return redirect('reservations')
     else:
         form = ReservationForm()
