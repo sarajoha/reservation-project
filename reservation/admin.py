@@ -51,8 +51,8 @@ class ReservationAdmin(admin.ModelAdmin):
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'email', 'username')
-
+    list_display = ('first_name', 'last_name', 'email', 'username', 'is_staff')
+    #is_staff.boolean = True
 
 # Register your models here.
 admin.site.register(User, UserAdmin)

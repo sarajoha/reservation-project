@@ -10,11 +10,12 @@ class ReservationForm(forms.ModelForm):
 
     #que en el campo de user, me guarde el user que esta logueado
     #user = User.object.filter
+    user = ''
 
     class Meta:
         model = Reservation
-        fields = ('start_datetime', 'duration_text', 'motive', 'user')
-        labels = {'duration_text': 'Duracion', 'motive': 'Motivo', 'user': 'Usuario', 'start_datetime': 'Fecha y hora'}
+        fields = ('start_datetime', 'duration_text', 'motive',)
+        labels = {'duration_text': 'Duracion', 'motive': 'Motivo', 'start_datetime': 'Fecha y hora'}
         widgets = {
             'start_datetime': DateTimePickerInput(format='%Y-%m-%d %H:%M'),
         }
