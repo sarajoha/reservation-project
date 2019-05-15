@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'django_extensions',
     'django.contrib.humanize',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
